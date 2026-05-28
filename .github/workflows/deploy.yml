@@ -1,0 +1,50 @@
+name: Deploy to Salesforce
+
+on:
+  push:
+    branches:
+      - developer/**
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Salesforce CLI
+        run: npm install -g @salesforce/cli
+
+      - name: Authenticate to Salesforce
+        run: |
+          echo "${{ secrets.FOLLETT_MS_SFDX_URL }}" > sfdx-auth-url.txt
+          sf org login sfdx-url --sfdx-url-file sfdx-auth-url.txt --alias target-org
+          rm sfdx-auth-url.txt
+
+      - name: Deploy metadata
+        run: |
+          HAS_DESTRUCTIVE=false
+          HAS_SOURCE=false
+          if [ -f manifest/destructiveChangesPost.xml ] && grep -q '<members>' manifest/destructiveChangesPost.xml; then
+            HAS_DESTRUCTIVE=true
+          fi
+          if find force-app -type f -not -name '.gitkeep' | grep -q .; then
+            HAS_SOURCE=true
+          fi
+          if [ "$HAS_DESTRUCTIVE" = "true" ]; then
+            echo "Running destructive deploy..."
+            sf project deploy start \
+              --metadata-dir manifest \
+              --target-org target-org \
+              --wait 30
+          fi
+          if [ "$HAS_SOURCE" = "true" ]; then
+            echo "Deploying source metadata..."
+            sf project deploy start \
+              --source-dir force-app \
+              --target-org target-org \
+              --test-level NoTestRun \
+              --wait 30
+          fi
+          if [ "$HAS_DESTRUCTIVE" = "false" ] && [ "$HAS_SOURCE" = "false" ]; then
+            echo "No metadata changes to deploy."
+          fi
