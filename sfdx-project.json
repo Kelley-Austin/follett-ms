@@ -1,0 +1,11 @@
+{
+  "packageDirectories": [
+    {
+      "path": "force-app",
+      "default": true
+    }
+  ],
+  "name": "follett-ms",
+  "namespace": "",
+  "sourceApiVersion": "62.0"
+}
