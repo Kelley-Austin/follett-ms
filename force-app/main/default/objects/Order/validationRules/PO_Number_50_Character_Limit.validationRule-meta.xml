@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>PO_Number_50_Character_Limit</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+LEN(PoNumber) &gt; 50,
+NOT($User.Data_Migration_Bypass__c = TRUE))</errorConditionFormula>
+    <errorDisplayField>PoNumber</errorDisplayField>
+    <errorMessage>PO Number must be 50 characters or less</errorMessage>
+</ValidationRule>

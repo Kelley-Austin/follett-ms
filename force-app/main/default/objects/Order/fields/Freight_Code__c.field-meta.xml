@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Freight_Code__c</fullName>
+    <externalId>false</externalId>
+    <formula>CASE(Shipping_Method__c,
+&quot;Airborne-Air-Next Day Air&quot;, &quot;Airborne&quot;,
+&quot;Airborne-Air-2nd Day Air&quot;, &quot;Airborne&quot;,
+&quot;Airborne-Air-3 Day Select&quot;, &quot;Airborne&quot;,
+&quot;APP-Air-Door to Door&quot;, &quot;APP&quot;,
+&quot;APP-Air-Worldwide Express&quot;, &quot;APP&quot;,
+&quot;APP-LTL-Door to Door&quot;, &quot;APP&quot;,
+&quot;DHL-Air-Worldwide Expedited&quot;, &quot;DHL&quot;,
+&quot;DHL-Air-Worldwide Express&quot;, &quot;DHL&quot;,
+&quot;FEDEX Next Day Air (10:30 AM)&quot;, &quot;FEDEX&quot;,
+&quot;FEDEX Next Day Air Early (8:00 AM)&quot;, &quot;FEDEX&quot;,
+&quot;FEDEX Next Day Air Saver (3:00 PM)&quot;, &quot;FEDEX&quot;,
+&quot;FEDEX 2nd Day Air&quot;, &quot;FEDEX&quot;,
+&quot;FEDEX 2nd Day Air AM&quot;, &quot;FEDEX&quot;,
+&quot;FEDEX 3 Day Select&quot;, &quot;FEDEX&quot;,
+&quot;FEDEX-International Economy&quot;, &quot;FEDEX&quot;,
+&quot;FEDEX-International Priority&quot;, &quot;FEDEX&quot;,
+&quot;FEDEX Home Delivery&quot;, &quot;FEDEX&quot;,
+&quot;FEDEX Ground&quot;, &quot;FEDEX&quot;,
+&quot;FEDEX Ground LTL&quot;, &quot;FEDEX GROUND&quot;,
+&quot;FSC-LTL-Door to Door&quot;, &quot;FSC&quot;,
+&quot;1DAY-PM&quot;, &quot;PROSHIP&quot;,
+&quot;1DAY&quot;, &quot;PROSHIP&quot;,
+&quot;1DAY-AM&quot;, &quot;PROSHIP&quot;,
+&quot;2DAY&quot;, &quot;PROSHIP&quot;,
+&quot;2DAY-AM&quot;, &quot;PROSHIP&quot;,
+&quot;3DAY&quot;, &quot;PROSHIP&quot;,
+&quot;GROUND&quot;, &quot;PROSHIP&quot;,
+&quot;INTERNATIONAL PRIORITY-EXP&quot;, &quot;PROSHIP&quot;,
+&quot;INTERNATIONAL PRIORITY&quot;, &quot;PROSHIP&quot;,
+&quot;INTERNATIONAL GROUND&quot;, &quot;PROSHIP&quot;,
+&quot;GROUND HOME DELIVERY&quot;, &quot;PROSHIP&quot;,
+&quot;PUROLATOR Canada Standard&quot;, &quot;PUR&quot;,
+&quot;UPS Next Day Air (10:30 AM)&quot;, &quot;UPS&quot;,
+&quot;UPS Next Day Air Early (8:00 AM)&quot;, &quot;UPS&quot;,
+&quot;UPS Next Day Air Saver (3:00 PM)&quot;, &quot;UPS&quot;,
+&quot;UPS 2nd Day Air&quot;, &quot;UPS&quot;,
+&quot;UPS Worldwide Express&quot;, &quot;UPS&quot;,
+&quot;UPS 3 Day Select&quot;, &quot;UPS&quot;,
+&quot;UPS Ground&quot;, &quot;UPS&quot;,
+&quot;UPS International Ground (CA / MX)&quot;, &quot;UPS&quot;,
+&quot;UPS First Class Mail&quot;, &quot;UPS&quot;,
+&quot;UPS SurePost Bound Printed Matter&quot;, &quot;UPS&quot;,
+&quot;UPS SurePost&quot;, &quot;UPS&quot;,
+&quot;UPS Worldwide Express Plus&quot;, &quot;UPS&quot;,
+&quot;UPS Worldwide Expedited&quot;, &quot;UPS&quot;,
+&quot;UPS Worldwide Express Saver&quot;, &quot;UPS&quot;,
+&quot;POSTAL DELIVERY&quot;, &quot;UPS&quot;,
+&quot;USPS-Air-International Air Mail&quot;, &quot;USPS&quot;,
+&quot;USPS-Air-Priority Mail&quot;, &quot;USPS&quot;,
+&quot;USPS-First Class Mail&quot;, &quot;USPS&quot;,NULL)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Freight Code</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

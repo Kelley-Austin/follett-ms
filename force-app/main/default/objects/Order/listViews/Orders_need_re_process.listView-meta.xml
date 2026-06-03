@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Orders_need_re_process</fullName>
+    <columns>ORDERS.ORDER_NUMBER</columns>
+    <columns>SALES.ACCOUNT.NAME</columns>
+    <columns>ORDERS.EFFECTIVE_DATE</columns>
+    <columns>ORDERS.TOTAL_AMOUNT</columns>
+    <columns>ORDERS.TYPE</columns>
+    <columns>HasBeenRead__c</columns>
+    <columns>ORDERS.STATUS</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>ORDERS.STATUS</field>
+        <operation>equals</operation>
+        <value>Draft</value>
+    </filters>
+    <filters>
+        <field>HasBeenRead__c</field>
+        <operation>equals</operation>
+        <value>1</value>
+    </filters>
+    <label>Orders need re-process</label>
+</ListView>

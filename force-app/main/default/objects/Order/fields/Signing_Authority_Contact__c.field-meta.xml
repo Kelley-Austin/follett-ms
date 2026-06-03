@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Signing_Authority_Contact__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <label>Signing Authority Contact</label>
+    <referenceTo>Contact</referenceTo>
+    <relationshipLabel>Orders (Signing Authority Contact)</relationshipLabel>
+    <relationshipName>Orders1</relationshipName>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Lookup</type>
+</CustomField>

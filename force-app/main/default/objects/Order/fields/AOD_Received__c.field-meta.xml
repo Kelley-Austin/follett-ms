@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>AOD_Received__c</fullName>
+    <description>This field will be populated by automation transmitted from Oracle. Do NOT update this field manually</description>
+    <inlineHelpText>This field will be populated by automation transmitted from Oracle. Do NOT update this field manually</inlineHelpText>
+    <label>SAD Received</label>
+    <required>false</required>
+    <trackHistory>true</trackHistory>
+    <type>Date</type>
+</CustomField>

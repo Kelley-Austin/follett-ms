@@ -2,7 +2,15 @@ public with sharing class OrderTriggerHelper {
 
     // Fires before insert — stamps the Delay Invoice Date from the quote onto the order
     // and sets No Touch renewal status. Hold + Delayed Invoice status are set after approval.
-    public static void process(Map<Id, Order> newQuoteToOrderMap) {
+    public static void process(List<Order> newOrders) {
+        Map<Id, Order> newQuoteToOrderMap = new Map<Id, Order>();
+        for (Order ord : newOrders) {
+            if (ord.Type == 'Renewal') {
+                newQuoteToOrderMap.put(ord.SBQQ__Quote__c, ord);
+            }
+        }
+        if (newQuoteToOrderMap.isEmpty()) return;
+
         for (SBQQ__Quote__c quote : [
             SELECT
                 SBQQ__Opportunity2__r.SBQQ__RenewedContract__r.Renewal_Path__c,

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Inside_CS_Orders</fullName>
+    <columns>ORDERS.ORDER_NUMBER</columns>
+    <columns>CONTRACT.CONTRACT_NUMBER</columns>
+    <columns>SALES.ACCOUNT.NAME</columns>
+    <columns>ORDERS.EFFECTIVE_DATE</columns>
+    <columns>ORDERS.TOTAL_AMOUNT</columns>
+    <columns>ORDERS.STATUS</columns>
+    <columns>CREATEDBY_USER.ALIAS</columns>
+    <columns>Owner_Name__c</columns>
+    <columns>Notes__c</columns>
+    <columns>Delay_Invoice_Date__c</columns>
+    <columns>CSM_Name__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>ORDERS.EFFECTIVE_DATE</field>
+        <operation>greaterOrEqual</operation>
+        <value>4/1/2026</value>
+    </filters>
+    <filters>
+        <field>CREATEDBY_USER.ALIAS</field>
+        <operation>equals</operation>
+        <value>Kmul,hhans,hheat,lfulc,kschr,Mtalb</value>
+    </filters>
+    <label>Inside CS Orders</label>
+    <sharedTo>
+        <group>Inside_Customer_Success</group>
+    </sharedTo>
+</ListView>

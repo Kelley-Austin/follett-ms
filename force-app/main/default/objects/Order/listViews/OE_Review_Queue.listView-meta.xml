@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>OE_Review_Queue</fullName>
+    <columns>ORDERS.ORDER_NUMBER</columns>
+    <columns>SALES.ACCOUNT.NAME</columns>
+    <columns>ORDERS.CREATED_DATE</columns>
+    <columns>ORDERS.TOTAL_AMOUNT</columns>
+    <columns>ORDERS.TYPE</columns>
+    <columns>Owner_Name__c</columns>
+    <columns>ORDERS.STATUS</columns>
+    <columns>Notes__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>ORDERS.STATUS</field>
+        <operation>equals</operation>
+        <value>Sync to ERP,Entered,Pending SAD</value>
+    </filters>
+    <filters>
+        <field>Oracle_Order_Validated__c</field>
+        <operation>notEqual</operation>
+        <value>1</value>
+    </filters>
+    <filters>
+        <field>ORDERS.TYPE</field>
+        <operation>notEqual</operation>
+        <value>Renewal</value>
+    </filters>
+    <filters>
+        <field>ORDERS.CREATED_DATE</field>
+        <operation>greaterOrEqual</operation>
+        <value>4/13/2026 12:00 AM</value>
+    </filters>
+    <label>OE Review Queue</label>
+</ListView>

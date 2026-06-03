@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Order_Activation</fullName>
+    <active>false</active>
+    <description>You cannot manually Activate the Order.</description>
+    <errorConditionFormula>AND(
+  ISPICKVAL(Status, &quot;Activated&quot;),
+  NOT(ISPICKVAL(PRIORVALUE(Status), &quot;Activated&quot;)),
+  ISBLANK(Oracle_External_Id__c),
+  $User.Alias &lt;&gt; &quot;binte&quot;
+)</errorConditionFormula>
+    <errorMessage>You cannot manually Activate the Order.</errorMessage>
+</ValidationRule>

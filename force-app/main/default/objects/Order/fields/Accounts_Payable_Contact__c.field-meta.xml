@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Accounts_Payable_Contact__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <label>Accounts Payable Contact</label>
+    <referenceTo>Contact</referenceTo>
+    <relationshipLabel>Orders (Accounts Payable Contact)</relationshipLabel>
+    <relationshipName>Orders5</relationshipName>
+    <required>false</required>
+    <trackHistory>true</trackHistory>
+    <type>Lookup</type>
+</CustomField>

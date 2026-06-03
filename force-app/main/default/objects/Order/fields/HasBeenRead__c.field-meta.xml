@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>HasBeenRead__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Required for the integration to Oracle</description>
+    <inlineHelpText>Required for the integration to Oracle</inlineHelpText>
+    <label>HasBeenRead</label>
+    <trackHistory>false</trackHistory>
+    <type>Checkbox</type>
+</CustomField>

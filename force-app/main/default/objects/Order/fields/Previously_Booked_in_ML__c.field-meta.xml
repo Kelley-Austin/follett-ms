@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Previously_Booked_in_ML__c</fullName>
+    <formula>Opportunity.Previously_Booked_in_ML__c</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Previously Booked in ML</label>
+    <trackHistory>false</trackHistory>
+    <type>Checkbox</type>
+</CustomField>

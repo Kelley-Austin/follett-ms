@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Order_Sub_Type__c</fullName>
+    <description>formula pulling from Quote</description>
+    <externalId>false</externalId>
+    <formula>SBQQ__Quote__r.Quote_Sub_Type_Formula__c</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>Value pulled from the Quote record. Shows the transaction type.</inlineHelpText>
+    <label>Order Sub-Type</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

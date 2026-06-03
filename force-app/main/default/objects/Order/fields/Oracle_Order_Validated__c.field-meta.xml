@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Oracle_Order_Validated__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Manually checked to filter booking teams list</description>
+    <inlineHelpText>Manually checked to filter booking teams list</inlineHelpText>
+    <label>Oracle Order Validated</label>
+    <trackHistory>false</trackHistory>
+    <type>Checkbox</type>
+</CustomField>

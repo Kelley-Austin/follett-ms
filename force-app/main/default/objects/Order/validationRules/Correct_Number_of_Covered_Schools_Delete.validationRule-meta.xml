@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Correct_Number_of_Covered_Schools_Delete</fullName>
+    <active>false</active>
+    <description>You need to delete this Order, navigate back to the related Quote, and update the Covered Schools list so that the number of covered schools you select on the Quote or Quote Line Group equals the quantity of any subscription records</description>
+    <errorConditionFormula>AND(
+NOT(ISPICKVAL(Type, &apos;Amendment&apos;)),
+ISPICKVAL(Status, &apos;Pending Fulfillment&apos;),
+(Order_Item_Quantity__c != Order_Item_School_Count__c)
+)</errorConditionFormula>
+    <errorDisplayField>AccountId</errorDisplayField>
+    <errorMessage>You need to delete this Order, navigate back to the related Quote, and update the Covered Schools list so that the number of covered schools you select on the Quote or Quote Line Group equals the quantity of any subscription records</errorMessage>
+</ValidationRule>

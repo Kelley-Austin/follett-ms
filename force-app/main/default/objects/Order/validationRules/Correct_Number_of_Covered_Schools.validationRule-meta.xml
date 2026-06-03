@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Correct_Number_of_Covered_Schools</fullName>
+    <active>false</active>
+    <description>Ensure users have selected correct number if Covered Schools</description>
+    <errorConditionFormula>AND(
+ISPICKVAL(Type, &apos;Amendment&apos;),
+ISPICKVAL(Status, &apos;Pending Fulfillment&apos;),
+(Order_Item_Quantity__c != Order_Item_School_Count__c)
+)</errorConditionFormula>
+    <errorMessage>You need to update all Order Products on this Order so that the Covered_School_Oracle_No__c and School Count field contains only the sites that have been added to this amendment.</errorMessage>
+</ValidationRule>
