@@ -48,7 +48,6 @@ public with sharing class OrderTriggerHelper {
             if (justApproved && hasDelay) {
                 toUpdate.add(new Order(
                     Id = ord.Id,
-                    Oracle_Order_Hold__c = true,
                     Status = 'Delayed Invoice'
                 ));
             }

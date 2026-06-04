@@ -2,10 +2,9 @@ global class DelayedInvoiceReleaseBatch implements Database.Batchable<SObject>, 
 
     global Database.QueryLocator start(Database.BatchableContext bc) {
         return Database.getQueryLocator([
-            SELECT Id, Oracle_Order_Hold__c
+            SELECT Id
             FROM Order
             WHERE Status = 'Delayed Invoice'
-            AND Oracle_Order_Hold__c = true
             AND Delay_Invoice_Date__c != null
             AND Delay_Invoice_Date__c <= TODAY
         ]);
@@ -13,7 +12,6 @@ global class DelayedInvoiceReleaseBatch implements Database.Batchable<SObject>, 
 
     global void execute(Database.BatchableContext bc, List<Order> orders) {
         for (Order ord : orders) {
-            ord.Oracle_Order_Hold__c = false;
             ord.Status = 'Sync to ERP';
         }
         try {
