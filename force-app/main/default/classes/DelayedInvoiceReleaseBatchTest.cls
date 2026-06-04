@@ -7,7 +7,6 @@ public class DelayedInvoiceReleaseBatchTest {
         insert acc;
     }
 
-    // Simulates approval completing on an order with a delay date that has arrived
     @isTest
     static void testReleasesOrderWhenDateArrives() {
         Account acc = [SELECT Id FROM Account LIMIT 1];
@@ -17,7 +16,6 @@ public class DelayedInvoiceReleaseBatchTest {
             Status = 'Delayed Invoice',
             EffectiveDate = Date.today(),
             Type = 'Renewal',
-            Oracle_Order_Hold__c = true,
             Delay_Invoice_Date__c = Date.today()
         );
         insert ord;
@@ -26,21 +24,19 @@ public class DelayedInvoiceReleaseBatchTest {
         Database.executeBatch(new DelayedInvoiceReleaseBatch(), 200);
         Test.stopTest();
 
-        Order result = [SELECT Oracle_Order_Hold__c, Status FROM Order WHERE Id = :ord.Id];
-        System.assertEquals(false, result.Oracle_Order_Hold__c, 'Hold should be released when date has arrived');
-        System.assertEquals('Sync to ERP', result.Status, 'Status should move to Sync to ERP');
+        Order result = [SELECT Status FROM Order WHERE Id = :ord.Id];
+        System.assertEquals('Sync to ERP', result.Status, 'Status should move to Sync to ERP when delay date has arrived');
     }
 
     @isTest
-    static void testDoesNotReleaseFutureHold() {
+    static void testDoesNotReleaseFutureDate() {
         Account acc = [SELECT Id FROM Account LIMIT 1];
 
         Order ord = new Order(
             AccountId = acc.Id,
-            Status = 'Draft',
+            Status = 'Delayed Invoice',
             EffectiveDate = Date.today(),
             Type = 'Renewal',
-            Oracle_Order_Hold__c = true,
             Delay_Invoice_Date__c = Date.today().addDays(30)
         );
         insert ord;
@@ -49,20 +45,19 @@ public class DelayedInvoiceReleaseBatchTest {
         Database.executeBatch(new DelayedInvoiceReleaseBatch(), 200);
         Test.stopTest();
 
-        Order result = [SELECT Oracle_Order_Hold__c FROM Order WHERE Id = :ord.Id];
-        System.assertEquals(true, result.Oracle_Order_Hold__c, 'Hold should remain for future date');
+        Order result = [SELECT Status FROM Order WHERE Id = :ord.Id];
+        System.assertEquals('Delayed Invoice', result.Status, 'Status should remain Delayed Invoice when delay date is in the future');
     }
 
     @isTest
-    static void testDoesNotReleaseOrderWithNoHoldDate() {
+    static void testDoesNotReleaseOrderWithNoDelayDate() {
         Account acc = [SELECT Id FROM Account LIMIT 1];
 
         Order ord = new Order(
             AccountId = acc.Id,
-            Status = 'Draft',
+            Status = 'Delayed Invoice',
             EffectiveDate = Date.today(),
-            Type = 'Renewal',
-            Oracle_Order_Hold__c = true
+            Type = 'Renewal'
         );
         insert ord;
 
@@ -70,54 +65,8 @@ public class DelayedInvoiceReleaseBatchTest {
         Database.executeBatch(new DelayedInvoiceReleaseBatch(), 200);
         Test.stopTest();
 
-        Order result = [SELECT Oracle_Order_Hold__c FROM Order WHERE Id = :ord.Id];
-        System.assertEquals(true, result.Oracle_Order_Hold__c, 'Hold without a date should not be released by this batch');
-    }
-
-    @isTest
-    static void testHandleApprovalSetsHoldAndStatus() {
-        Account acc = [SELECT Id FROM Account LIMIT 1];
-
-        Order ord = new Order(
-            AccountId = acc.Id,
-            Status = 'Draft',
-            EffectiveDate = Date.today(),
-            Type = 'Renewal',
-            Delay_Invoice_Date__c = Date.today().addDays(30),
-            Approval_Status__c = 'Pending'
-        );
-        insert ord;
-
-        Test.startTest();
-        ord.Approval_Status__c = 'Approved';
-        update ord;
-        Test.stopTest();
-
-        Order result = [SELECT Oracle_Order_Hold__c, Status FROM Order WHERE Id = :ord.Id];
-        System.assertEquals(true, result.Oracle_Order_Hold__c, 'Hold should be set on approval when delay date is in the future');
-        System.assertEquals('Delayed Invoice', result.Status, 'Status should be Delayed Invoice on approval');
-    }
-
-    @isTest
-    static void testHandleApprovalNoHoldWhenNoDelayDate() {
-        Account acc = [SELECT Id FROM Account LIMIT 1];
-
-        Order ord = new Order(
-            AccountId = acc.Id,
-            Status = 'Draft',
-            EffectiveDate = Date.today(),
-            Type = 'Renewal',
-            Approval_Status__c = 'Pending'
-        );
-        insert ord;
-
-        Test.startTest();
-        ord.Approval_Status__c = 'Approved';
-        update ord;
-        Test.stopTest();
-
-        Order result = [SELECT Oracle_Order_Hold__c FROM Order WHERE Id = :ord.Id];
-        System.assertEquals(false, result.Oracle_Order_Hold__c, 'No hold should be set when no delay date');
+        Order result = [SELECT Status FROM Order WHERE Id = :ord.Id];
+        System.assertEquals('Delayed Invoice', result.Status, 'Status should remain Delayed Invoice when no delay date is set');
     }
 
     @isTest

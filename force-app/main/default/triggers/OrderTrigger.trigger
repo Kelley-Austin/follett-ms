@@ -1,11 +1,17 @@
-trigger OrderTrigger on Order (before insert, after update) {
+trigger OrderTrigger on Order (before insert) {
 
-    if (Trigger.isBefore && Trigger.isInsert) {
-        OrderTriggerHelper.process(Trigger.new);
-    }
+    if (Trigger.isBefore && Trigger.isInsert){
+        map<id,order> newQuoteToOrderMap = new map<id,order>{};
+        for (Order order : Trigger.New){
+            if (order.Type == 'Renewal'){
+                newQuoteToOrderMap.put(order.SBQQ__Quote__c, order);
+            }
+        }
 
-    if (Trigger.isAfter && Trigger.isUpdate) {
-        OrderTriggerHelper.handleApproval(Trigger.newMap, Trigger.oldMap);
+        if (!newQuoteToOrderMap.isEmpty()){
+           OrderTriggerHelper.process(newQuoteToOrderMap);
+        }
+
     }
 
 }
