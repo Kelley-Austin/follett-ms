@@ -1,5 +1,7 @@
 public with sharing class OrderTriggerHelper {
 
+    private static Boolean approvalHandled = false;
+
     // Fires before insert — stamps the Delay Invoice Date from the quote onto the order
     // and sets No Touch renewal status. Hold + Delayed Invoice status are set after approval.
     public static void process(List<Order> newOrders) {
@@ -33,6 +35,8 @@ public with sharing class OrderTriggerHelper {
 
     // Fires after update — when an Order is approved, apply the delayed invoice hold if applicable.
     public static void handleApproval(Map<Id, Order> newMap, Map<Id, Order> oldMap) {
+        if (approvalHandled) return;
+        approvalHandled = true;
         List<Order> toUpdate = new List<Order>();
         for (Order ord : newMap.values()) {
             Order oldOrd = oldMap.get(ord.Id);

@@ -14,7 +14,7 @@ public class DelayedInvoiceReleaseBatchTest {
 
         Order ord = new Order(
             AccountId = acc.Id,
-            Status = 'Draft',
+            Status = 'Delayed Invoice',
             EffectiveDate = Date.today(),
             Type = 'Renewal',
             Oracle_Order_Hold__c = true,

@@ -4,7 +4,8 @@ global class DelayedInvoiceReleaseBatch implements Database.Batchable<SObject>, 
         return Database.getQueryLocator([
             SELECT Id, Oracle_Order_Hold__c
             FROM Order
-            WHERE Oracle_Order_Hold__c = true
+            WHERE Status = 'Delayed Invoice'
+            AND Oracle_Order_Hold__c = true
             AND Delay_Invoice_Date__c != null
             AND Delay_Invoice_Date__c <= TODAY
         ]);
