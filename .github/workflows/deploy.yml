@@ -27,7 +27,7 @@ jobs:
           if [ -f manifest/destructiveChangesPost.xml ] && grep -q '<members>' manifest/destructiveChangesPost.xml; then
             HAS_DESTRUCTIVE=true
           fi
-          if find force-app -type f -not -name '.gitkeep' | grep -q .; then
+          if [ -f manifest/package.xml ] && grep -q '<members>' manifest/package.xml; then
             HAS_SOURCE=true
           fi
           if [ "$HAS_DESTRUCTIVE" = "true" ]; then
@@ -40,7 +40,7 @@ jobs:
           if [ "$HAS_SOURCE" = "true" ]; then
             echo "Deploying source metadata..."
             sf project deploy start \
-              --source-dir force-app \
+              --manifest manifest/package.xml \
               --target-org target-org \
               --test-level NoTestRun \
               --wait 30
