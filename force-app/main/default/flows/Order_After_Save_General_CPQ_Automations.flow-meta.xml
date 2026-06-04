@@ -231,7 +231,7 @@
         <locationX>50</locationX>
         <locationY>276</locationY>
         <defaultConnector>
-            <targetReference>Get_All_Opportunity_Products</targetReference>
+            <targetReference>Is_Delayed_Invoice_on_Sync_to_ERP</targetReference>
         </defaultConnector>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
@@ -418,6 +418,52 @@
                 <targetReference>Set_Order_Level_Hold</targetReference>
             </connector>
             <label>SAD/AOD Required</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Is_Delayed_Invoice_on_Sync_to_ERP</name>
+        <label>Has Delayed Invoice Date on Sync to ERP?</label>
+        <locationX>50</locationX>
+        <locationY>384</locationY>
+        <defaultConnector>
+            <targetReference>Get_All_Opportunity_Products</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>No</defaultConnectorLabel>
+        <rules>
+            <name>Yes_Delayed_Invoice_Sync</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Status</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Sync to ERP</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Status</leftValueReference>
+                <operator>IsChanged</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Delay_Invoice_Date__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Delay_Invoice_Date__c</leftValueReference>
+                <operator>GreaterThan</operator>
+                <rightValue>
+                    <elementReference>$Flow.CurrentDate</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Approval_Set_Status_To_Delayed_Invoice</targetReference>
+            </connector>
+            <label>Yes</label>
         </rules>
     </decisions>
     <decisions>
@@ -1343,6 +1389,22 @@ IF ( Text({!$Record.SBQQ__Quote__r.SBQQ__Type__c}) = &apos;Amendment&apos;,
             <field>Status</field>
             <value>
                 <stringValue>Activated</stringValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Approval_Set_Status_To_Delayed_Invoice</name>
+        <label>Approval - Set Order to Delayed Invoice</label>
+        <locationX>50</locationX>
+        <locationY>492</locationY>
+        <faultConnector>
+            <targetReference>CreateRenewalErrorLog</targetReference>
+        </faultConnector>
+        <inputAssignments>
+            <field>Status</field>
+            <value>
+                <stringValue>Delayed Invoice</stringValue>
             </value>
         </inputAssignments>
         <inputReference>$Record</inputReference>
