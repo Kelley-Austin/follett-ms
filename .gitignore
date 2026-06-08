@@ -2,3 +2,6 @@
 .localdevserver/
 node_modules/
 *.log
+
+# Salesforce org context cache — local only, not committed
+.sf-cache/
