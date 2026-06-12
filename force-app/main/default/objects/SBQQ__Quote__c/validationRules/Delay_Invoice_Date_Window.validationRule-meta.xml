@@ -12,5 +12,5 @@
   )
 )</errorConditionFormula>
     <errorDisplayField>Delay_Invoice_Date__c</errorDisplayField>
-    <errorMessage>Delay Invoice Date must fall within 15 days before the Subscription Start Date and cannot be after it. Please enter a date between 15 days before and the Start Date.</errorMessage>
+    <errorMessage>Delay Invoice Date must fall within 15 days before the Subscription Start Date and cannot be after it. Please enter a date between 15 days before and the Start Date. </errorMessage>
 </ValidationRule>
