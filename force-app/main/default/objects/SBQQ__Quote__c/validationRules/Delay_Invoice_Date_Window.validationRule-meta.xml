@@ -2,15 +2,12 @@
 <ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Delay_Invoice_Date_Window</fullName>
     <active>true</active>
-    <description>Blocks setting a Delay Invoice Date outside the 15-day window before the Subscription Start Date. Allowed range: Start Date minus 15 days through Start Date (inclusive).</description>
+    <description>Blocks setting a Delay Invoice Date after the 15th of the Subscription Start month. Allowed range: any date through the 15th of the start month (inclusive).</description>
     <errorConditionFormula>AND(
   NOT(ISBLANK(Delay_Invoice_Date__c)),
   NOT(ISBLANK(SBQQ__StartDate__c)),
-  OR(
-    Delay_Invoice_Date__c &lt; SBQQ__StartDate__c - 15,
-    Delay_Invoice_Date__c &gt; SBQQ__StartDate__c
-  )
+  Delay_Invoice_Date__c &gt; DATE(YEAR(SBQQ__StartDate__c), MONTH(SBQQ__StartDate__c), 15)
 )</errorConditionFormula>
     <errorDisplayField>Delay_Invoice_Date__c</errorDisplayField>
-    <errorMessage>Delay Invoice Date must fall within 15 days before the Subscription Start Date and cannot be after it. Please enter a date between 15 days before and the Start Date. </errorMessage>
+    <errorMessage>Delay Invoice Date cannot be later than the 15th of the Subscription Start month. Please enter a date on or before that date.</errorMessage>
 </ValidationRule>
