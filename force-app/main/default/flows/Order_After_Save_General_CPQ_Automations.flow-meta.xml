@@ -508,14 +508,14 @@
             <name>Yes_Has_Delay</name>
             <conditionLogic>and</conditionLogic>
             <conditions>
-                <leftValueReference>$Record.Delay_Invoice_Date__c</leftValueReference>
+                <leftValueReference>$Record.SBQQ__Quote__r.Delay_Invoice_Date__c</leftValueReference>
                 <operator>IsNull</operator>
                 <rightValue>
                     <booleanValue>false</booleanValue>
                 </rightValue>
             </conditions>
             <conditions>
-                <leftValueReference>$Record.Delay_Invoice_Date__c</leftValueReference>
+                <leftValueReference>$Record.SBQQ__Quote__r.Delay_Invoice_Date__c</leftValueReference>
                 <operator>GreaterThan</operator>
                 <rightValue>
                     <elementReference>$Flow.CurrentDate</elementReference>
@@ -1417,6 +1417,12 @@ IF ( Text({!$Record.SBQQ__Quote__r.SBQQ__Type__c}) = &apos;Amendment&apos;,
         <faultConnector>
             <targetReference>CreateRenewalErrorLog</targetReference>
         </faultConnector>
+        <inputAssignments>
+            <field>Delay_Invoice_Date__c</field>
+            <value>
+                <elementReference>$Record.SBQQ__Quote__r.Delay_Invoice_Date__c</elementReference>
+            </value>
+        </inputAssignments>
         <inputAssignments>
             <field>Status</field>
             <value>
