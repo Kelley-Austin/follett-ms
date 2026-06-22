@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Block_Sync_With_Delay_Invoice_Date</fullName>
+    <active>true</active>
+    <description>Prevents manually moving an Order to Sync to ERP when a future Delay Invoice Date is set. To bypass delayed invoicing, amend the order and remove the Delay Invoice Date first.</description>
+    <errorConditionFormula>AND(
+  ISCHANGED(Status),
+  TEXT(Status) = 'Sync to ERP',
+  NOT(ISBLANK(Delay_Invoice_Date__c)),
+  Delay_Invoice_Date__c &gt; TODAY()
+)</errorConditionFormula>
+    <errorDisplayField>Status</errorDisplayField>
+    <errorMessage>This order has a future Delay Invoice Date and cannot be manually moved to Sync to ERP. To bypass the delayed invoicing process, please amend the order and remove the Delay Invoice Date first.</errorMessage>
+</ValidationRule>
