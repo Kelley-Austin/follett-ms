@@ -494,6 +494,28 @@
             </connector>
             <label>No Touch</label>
         </rules>
+        <rules>
+            <name>Auto_Quote_Send</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Type</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Renewal</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.SBQQ__Quote__r.Renewal_Type__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Auto Quote Send</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Has_Delayed_Invoice_Date</targetReference>
+            </connector>
+            <label>Auto Quote Send</label>
+        </rules>
     </decisions>
     <decisions>
         <name>Has_Delayed_Invoice_Date</name>
