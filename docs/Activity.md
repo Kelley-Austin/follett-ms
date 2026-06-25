@@ -9,3 +9,4 @@ Use `git log -p docs/Activity.md` to audit changes over time.
 - `2026-06-12T17:05:36.454Z` · **target-org-switched** · Target org switched to follett-ms-sandbox · source=watcher
 - `2026-06-12T18:56:27.852Z` · **target-org-switched** · Target org switched to follett-ms-uat-sandbox · source=watcher
 - `2026-06-12T18:56:27.854Z` · **target-org-switched** · Target org switched to follett-ms-uat-sandbox · source=watcher
+- `2026-06-25T14:26:17.593Z` · **target-org-switched** · Target org switched to clare.segrue@perficient.com.follett.production.uat · source=watcher
